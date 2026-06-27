@@ -318,6 +318,27 @@ FEATURED PRODUCT CATEGORIES -->
 
 <script src="js/script.js"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+<script>
+emailjs.init("YOUR_PUBLIC_KEY");
+
+document.getElementById("quoteForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    emailjs.sendForm(
+        "YOUR_SERVICE_ID",
+        "YOUR_TEMPLATE_ID",
+        this
+    ).then(function() {
+        alert("Quotation request sent successfully!");
+        document.getElementById("quoteForm").reset();
+    }, function(error) {
+        alert("Failed to send request. Please try again.");
+    });
+});
+</script>
+
 </body>
 
 </html>
@@ -810,22 +831,55 @@ and maintenance supplies.
 </a>
             </div>
 
-            <!-- RIGHT: FORM -->
-            <form class="contact-form">
+           <!-- RIGHT: REQUEST A QUOTATION FORM -->
+<form id="quoteForm" class="contact-form">
 
-                <input type="text" placeholder="Full Name" required>
-                <input type="email" placeholder="Email Address" required>
-                <input type="text" placeholder="Subject">
+    <h2>Request a Quotation</h2>
 
-                <textarea rows="6" placeholder="Your Message"></textarea>
+    <input type="text"
+           name="name"
+           placeholder="Full Name"
+           required>
 
-                <button type="submit">
-                    <i class="fa-solid fa-paper-plane"></i> Send Message
-                </button>
+    <input type="email"
+           name="email"
+           placeholder="Email Address"
+           required>
 
-            </form>
+    <input type="text"
+           name="company"
+           placeholder="Company Name"
+           required>
 
-        </div>
+    <input type="text"
+           name="phone"
+           placeholder="Contact Number"
+           required>
 
-    </div>
-</section>
+    <select name="category" required>
+        <option value="">Select Product Category</option>
+        <option>Air Care System</option>
+        <option>Toilet Sanitizer & Deodorizer</option>
+        <option>Hand Soap Dispensers</option>
+        <option>Industrial Cleaning Essentials</option>
+        <option>Hand Dryers</option>
+        <option>Tissue Dispensers & Paper Products</option>
+        <option>Floor Matting Solutions</option>
+        <option>Waste Bins & Customized Fixtures</option>
+        <option>Umbrella Rack & Dryer</option>
+        <option>Road Safety Protection Equipment</option>
+        <option>Construction & Hardware Supplies</option>
+        <option>Housekeeping & Janitorial Supplies</option>
+    </select>
+
+    <textarea rows="6"
+              name="message"
+              placeholder="Describe your requirement"
+              required></textarea>
+
+    <button type="submit">
+        <i class="fa-solid fa-paper-plane"></i>
+        Send Request
+    </button>
+
+</form>
